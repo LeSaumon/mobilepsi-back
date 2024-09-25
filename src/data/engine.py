@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, create_engine
 from typing import Optional
 from datetime import datetime
 from sqlmodel import Field, SQLModel 
-
+from config import POSTGRES_URL
 class Vehicule(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     type: str
@@ -59,10 +59,9 @@ class Carpooling(SQLModel, table=True):
     departure_timestamp: datetime
     arrival_timestamp: datetime
     # attendees: List["User"] = Relationship(back_populates="carpoolings")
-    
-postgres_url = "postgresql://postgres:saumonpass@localhost:5432/postgres"
 
-engine = create_engine(postgres_url, echo=True)
+
+engine = create_engine(POSTGRES_URL, echo=True)
 
 def init_db():
     SQLModel.metadata.create_all(engine)

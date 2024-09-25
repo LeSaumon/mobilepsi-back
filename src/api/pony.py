@@ -21,7 +21,7 @@ def get_bike_data(id: int = 0) -> Pony:
         else:
             return pony
                     
-@router.patch("/bikes/update/{pony_id}", tags=["bikes"])
+@router.patch("/bike/update/{pony_id}", tags=["bikes"])
 def update_bike(pony_id: int, pony: PonyUpdate) -> Pony:
     with Session(engine) as session:
         pony_db = session.get(Pony, pony_id)

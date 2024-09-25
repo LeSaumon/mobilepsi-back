@@ -8,6 +8,17 @@ router = APIRouter()
 def get_parking_data() -> bool:
     return False if random.randrange(0,2) == 1 else True
 
+@router.get("/random/bikes")
+def random_bikes():
+    data = [
+        {
+            "latitude": random.uniform(47.4, 47.5),
+            "longitude": random.uniform(-0.5, -0.6),
+            "is_available": False if random.randrange(0,2) == 1 else True,
+        } for i in range(0, 100)
+    ]
+    return data
+
 @router.get("/random/parkings")
 def random_parkings():
     data = [

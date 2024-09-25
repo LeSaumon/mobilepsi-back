@@ -18,6 +18,7 @@ def get_all_pony(session: Session) -> List[Pony] | None:
 def get_pony_by_id(session: Session, pony_id: int) -> Pony | None:
     query = select(Pony).where(Pony.id == pony_id)
     pony = session.exec(query)
+    print(pony)
     return pony.one_or_none()
 
 

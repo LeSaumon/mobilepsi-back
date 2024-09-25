@@ -1,10 +1,10 @@
-from sqlmodel import SQLModel, create_engine, Session
+from sqlmodel import SQLModel, create_engine
 from typing import Optional
 from datetime import datetime
 from sqlmodel import Field, SQLModel 
 
 class Vehicule(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     type: str
     brand: str
     model: str
@@ -16,6 +16,12 @@ class Pony(SQLModel, table=True):
     latitude: str
     longitude: str
     is_available: bool
+    
+class PonyUpdate(SQLModel):
+    id: int | None = None
+    latitude: str | None = None
+    longitude: str | None = None
+    is_available: bool | None = None
     
 class Parking(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -60,6 +66,3 @@ engine = create_engine(postgres_url, echo=True)
 
 def init_db():
     SQLModel.metadata.create_all(engine)
-
-def get_session():
-    return Session(engine)

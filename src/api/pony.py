@@ -34,3 +34,13 @@ def update_bike(pony_id: int, pony: PonyUpdate) -> Pony:
         session.refresh(pony_db)
         return pony_db
 
+@router.delete("/bike/{id}")
+def delete_bike(id: int = 0) -> None:
+    with Session(engine) as session:
+        pony = get_pony_by_id(session, id)
+        if not pony:
+            raise HTTPException(status_code=404, details="Pony not found!")
+        else:
+            session.delete(pony)
+            session.commit()
+            return True

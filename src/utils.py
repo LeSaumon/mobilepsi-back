@@ -9,7 +9,7 @@ def get_free_bikes_data() -> Dict[str, str]:
     response = requests.get("https://gbfs.getapony.com/v1/Angers/en/free_bike_status.json")
     return response.json()
 
-def initialize_database():
+def initialize_database() -> None:
     data = get_free_bikes_data()
     for bike in data["data"]["bikes"]:
         with Session(engine) as session:
@@ -21,4 +21,4 @@ def initialize_database():
                     ),
                 session=session
                 )
-    return {"data": f"Added {len(data['data']['bikes'])} to database !"}
+    print(f"Added {len(data['data']['bikes'])} to database !")

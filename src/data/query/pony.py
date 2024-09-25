@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from data.engine import Pony
 from sqlmodel import Session, select
 from typing import List
@@ -14,22 +15,16 @@ def get_all_pony(session: Session) -> List[Pony] | None:
     ponys = session.exec(query)
     return ponys.fetchall()
 
-# def get_all_users(session: Session) -> List[User] | None:
-#     query = select(User)
-#     users = session.exec(query)
-#     return users.fetchall()
+def get_pony_by_id(session: Session, pony_id: int) -> Pony | None:
+    query = select(Pony).where(Pony.id == pony_id)
+    pony = session.exec(query)
+    return pony.one_or_none()
 
 
-# def get_user_by_member_id(member_id: int, session: Session) -> User | None:
-#     query = select(User).where(User.member_id == str(member_id))
-#     user = session.exec(query)
-#     return user.one_or_none()
-
-
-# def user_table_is_empty(session: Session) -> bool:
-#     query = select(func.count()).select_from(User)
-#     result = session.exec(query)
-#     return True if result.first() == 0 else False
+def pony_table_is_empty(session: Session) -> bool:
+    query = select(func.count()).select_from(Pony)
+    result = session.exec(query)
+    return True if result.first() == 0 else False
 
 
 # def get_all_users_member_ids(session) -> List[str] | None:

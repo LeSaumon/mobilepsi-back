@@ -3,6 +3,8 @@ from typing import Optional
 from datetime import datetime
 from sqlmodel import Field, SQLModel 
 from config import POSTGRES_URL
+
+
 class Vehicule(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     type: str
@@ -58,6 +60,8 @@ class Carpooling(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     departure_timestamp: datetime
     arrival_timestamp: datetime
+    # departure_location: string
+    # arrival_location: string
     # attendees: List["User"] = Relationship(back_populates="carpoolings")
 
 

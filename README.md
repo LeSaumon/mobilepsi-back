@@ -34,9 +34,10 @@ pip install -r requirements.txt
 ```
 
 4. Setting up the postgres database
+
 *You can follow any tutorial that teach you how to set up a postgresql database*
 
-5. Modify the `src/config.py` file to adapt your database url
+1. Modify the `src/config.py` file to adapt your database url
 
 ```python
 postgres_url = "postgresql://<username>:<password>@<host>/<database_name>"

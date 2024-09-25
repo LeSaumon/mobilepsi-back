@@ -28,7 +28,7 @@ class Parking(SQLModel, table=True):
     status: str
     latitude: str
     longitude: str
-    sensor_id: int = Field(default=None, foreign_key="sensor.id")
+    sensor_id: int | None = Field(default=None, foreign_key="sensor.id")
     
     
 class Rent(SQLModel, table=True):

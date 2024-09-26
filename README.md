@@ -10,10 +10,6 @@ L'application permet :
 - De s'inscrire à un covoiturage où une annonce de location de véhicule
 - De consulter les réservations disponibles
 - De modifier ses reservations créées ou celles ou l'on est inscrit
-- 
-
-
-
 
 ## Launch the backend
 

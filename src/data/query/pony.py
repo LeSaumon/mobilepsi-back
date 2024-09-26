@@ -25,9 +25,3 @@ def pony_table_is_empty(session: Session) -> bool:
     query = select(func.count()).select_from(Pony)
     result = session.exec(query)
     return True if result.first() == 0 else False
-
-
-# def get_all_users_member_ids(session) -> List[str] | None:
-#     query = select(User.member_id)
-#     users = session.exec(query)
-#     return users.fetchall()

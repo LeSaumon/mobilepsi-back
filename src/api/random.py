@@ -1,15 +1,16 @@
+from typing import Dict
 from fastapi import APIRouter
 import random
 from datetime import datetime
 
 router = APIRouter()
 
-@router.get("/random/parking/available")
+@router.get("/random/parking/available", tags=["random"])
 def get_parking_data() -> bool:
     return False if random.randrange(0,2) == 1 else True
 
-@router.get("/random/bikes")
-def random_bikes():
+@router.get("/random/bikes", tags=["random"])
+def random_bikes() -> Dict[str, bool | float | int]:
     data = [
         {
             "latitude": random.uniform(47.4, 47.5),
@@ -19,8 +20,8 @@ def random_bikes():
     ]
     return data
 
-@router.get("/random/parkings")
-def random_parkings():
+@router.get("/random/parkings", tags=["random"])
+def random_parkings() -> Dict[str, bool | float | int]:
     data = [
         {
             "status": False if random.randrange(0,2) == 1 else True,
@@ -31,8 +32,8 @@ def random_parkings():
     ]
     return data
 
-@router.get("/random/sensors")
-def random_sensors():
+@router.get("/random/sensors", tags=["random"])
+def random_sensors() -> Dict[str, str | datetime | float]:
     data = [
         {
             "name": f"sensor_{random.randint(1, 50)}_{random.randint(51, 100)}",

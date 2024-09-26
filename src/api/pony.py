@@ -13,7 +13,7 @@ def get_bikes_data() -> Pony | None:
         return ponys
     
 @router.get("/bike/{id}", tags=["bikes"])
-def get_bike_data(id: int = 0) -> Pony:
+def get_bike_data(id: int = 0) -> Pony | None:
     with Session(engine) as session:
         if pony:= get_pony_by_id(session=session, pony_id=id):
             return pony
@@ -21,7 +21,7 @@ def get_bike_data(id: int = 0) -> Pony:
             raise HTTPException(status_code=404, details="Pony not found!")
                     
 @router.patch("/bike/update/{pony_id}", tags=["bikes"])
-def update_bike(pony_id: int, pony: PonyUpdate) -> Pony:
+def update_bike(pony_id: int, pony: PonyUpdate) -> Pony | None:
     with Session(engine) as session:
         if pony_db := session.get(Pony, pony_id):
             pony_data = pony.model_dump(exclude_unset=True)
@@ -32,8 +32,8 @@ def update_bike(pony_id: int, pony: PonyUpdate) -> Pony:
         else:
             raise HTTPException(status_code=404, details="Pony not found!")
 
-@router.delete("/bike/{id}")
-def delete_bike(id: int = 0) -> None:
+@router.delete("/bike/{id}", tags=["bikes"])
+def delete_bike(id: int = 0) -> bool | None:
     with Session(engine) as session:
         if pony:= get_pony_by_id(session, id):
             session.delete(pony)
